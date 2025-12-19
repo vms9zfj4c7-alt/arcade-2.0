@@ -27,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* --- INPUT FICHIER CACHÉ (Sécurité) --- */
+        /* --- INPUT FICHIER CACHÉ --- */
         #rom-uploader { display: none; }
 
         /* --- BOUTON RETOUR --- */
@@ -40,18 +40,11 @@
         }
         #backBtn:hover { background: var(--text-color); color: var(--bg-color); }
 
-        /* --- HUB (CORRIGÉ) --- */
+        /* --- HUB --- */
         #hubSection {
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center;
-            min-height: 100vh; 
-            width: 100%; 
-            text-align: center; 
-            animation: fadeIn 1s ease;
-            padding: 50px 0;
-            box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; width: 100%; text-align: center; animation: fadeIn 1s ease;
+            padding: 50px 0; box-sizing: border-box;
         }
 
         .hub-title {
@@ -59,8 +52,7 @@
             background: linear-gradient(to right, #00fff2, #ff00de);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 50px; text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
-            letter-spacing: 5px;
-            margin-top: 0; 
+            letter-spacing: 5px; margin-top: 0; 
         }
 
         .category-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
@@ -82,46 +74,13 @@
         .cat-retro h3 { color: #ff00de; }
 
         /* --- SECTIONS JEUX --- */
-        .game-section { 
-            display: none; 
-            width: 100%; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-top: 40px; 
-            padding-bottom: 50px; 
-            animation: slideUp 0.5s ease; 
-        }
+        .game-section { display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 40px; padding-bottom: 50px; animation: slideUp 0.5s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- HEADER SECTION (TITRES CENTRÉS) --- */
-        .section-header {
-            text-align: center;
-            width: 100%;
-            margin-bottom: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-header h1 { 
-            font-size: 3rem; 
-            letter-spacing: 4px; 
-            color: var(--accent-main); 
-            text-transform: uppercase; 
-            margin: 0; 
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); 
-            text-align: center;
-        }
-        
-        .section-header h2 { 
-            font-size: 1.2rem; 
-            color: #7f8c8d; 
-            font-weight: normal; 
-            margin-top: 10px; 
-            letter-spacing: 2px; 
-            text-align: center;
-        }
+        .section-header { text-align: center; width: 100%; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+        .section-header h1 { font-size: 3rem; letter-spacing: 4px; color: var(--accent-main); text-transform: uppercase; margin: 0; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); text-align: center; }
+        .section-header h2 { font-size: 1.2rem; color: #7f8c8d; font-weight: normal; margin-top: 10px; letter-spacing: 2px; text-align: center; }
 
         .theme-horror { --bg-color: #0a0a12; --panel-bg: #16213e; --text-color: #ecf0f1; --accent-main: #f1c40f; --accent-secondary: #e74c3c; }
         .theme-retro { --bg-color: #120429; --panel-bg: #260a4f; --text-color: #ffffff; --accent-main: #00fff2; --accent-secondary: #d600ff; }
@@ -166,8 +125,6 @@
             .main-container { flex-direction: column-reverse; align-items: center; }
             .menu-column, .preview-column { width: 100%; }
             .preview-column { height: 350px; }
-            
-            /* AJUSTEMENT MOBILE */
             .hub-title { font-size: 2.5rem; margin-top: 30px; }
             .section-header h1 { font-size: 2rem; }
         }
@@ -175,7 +132,7 @@
 </head>
 <body>
 
-    <input type="file" id="rom-uploader" accept=".nes,.sfc,.smc,.gba,.gb,.n64,.z64,.md" />
+    <input type="file" id="rom-uploader" accept=".nes,.sfc,.smc,.gba,.gb,.n64,.z64,.md,.nds" />
 
     <button id="backBtn" onclick="goBackToHub()">🏠 ACCUEIL</button>
 
@@ -209,9 +166,7 @@
         </header>
         <div class="main-container">
             <div class="menu-column">
-                
                 <div class="game-btn" onclick="launchGame('fnafnes')" onmouseenter="showPreview('fnafnes', 'horror')" onmouseleave="resetPreview('horror')"><span>FNAF (NES)</span></div>
-
                 <div class="game-btn" onclick="launchGame('fnaf1')" onmouseenter="showPreview('fnaf1', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 1</span></div>
                 <div class="game-btn" onclick="launchGame('fnaf2')" onmouseenter="showPreview('fnaf2', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 2</span></div>
                 <div class="game-btn" onclick="launchGame('fnaf3')" onmouseenter="showPreview('fnaf3', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 3</span></div>
@@ -240,8 +195,13 @@
         </header>
         <div class="main-container">
             <div class="menu-column">
+                
+                <div class="game-btn" onclick="launchGame('nsmb')" onmouseenter="showPreview('nsmb', 'retro')" onmouseleave="resetPreview('retro')"><span>NEW SUPER MARIO BROS (DS)</span></div>
+
                 <div class="game-btn" onclick="launchGame('mario64')" onmouseenter="showPreview('mario64', 'retro')" onmouseleave="resetPreview('retro')"><span>SUPER MARIO 64</span></div>
+                
                 <div class="game-btn" onclick="launchGame('mario')" onmouseenter="showPreview('mario', 'retro')" onmouseleave="resetPreview('retro')"><span>SUPER MARIO BROS</span></div>
+                
                 <div class="game-btn" onclick="launchGame('tetris')" onmouseenter="showPreview('tetris', 'retro')" onmouseleave="resetPreview('retro')"><span>TETRIS (GB)</span></div>
                 <div class="game-btn" onclick="launchGame('dk')" onmouseenter="showPreview('dk', 'retro')" onmouseleave="resetPreview('retro')"><span>DONKEY KONG (GB)</span></div>
                 <div class="game-btn" onclick="launchGame('kirby')" onmouseenter="showPreview('kirby', 'retro')" onmouseleave="resetPreview('retro')"><span>KIRBY'S DREAM LAND</span></div>
@@ -262,12 +222,10 @@
 
    <script>
         // --- DONNÉES JEUX ---
-        // romPath doit être EXACTEMENT le nom du fichier sur GitHub
+        // romPath doit être EXACTEMENT le nom du fichier sur GitHub/Dossier
         const gamesData = {
-            // HORROR (NES DEMAKE AJOUTÉ)
+            // FNAF
             'fnafnes': { title: "FNAF (NES DEMAKE)", desc: "Le cauchemar en 8-bits. (Fichier .nes)", img: "https://m.gjcdn.net/game-screenshot/200/35829090-qzkrk8hm-v4.webp", romPath: "fnaf.nes", core: "nes" },
-
-            // FNAF WEB
             'fnaf1': { title: "Five Nights at Freddy's 1", desc: "Survivez 5 nuits.", img: "https://sm.ign.com/ign_fr/cover/f/five-night/five-nights-at-freddys_mnb3.jpg", url: "https://irv77.github.io/hd_fnaf/1/" },
             'fnaf2': { title: "Five Nights at Freddy's 2", desc: "Pas de portes, juste un masque.", img: "https://m.media-amazon.com/images/I/81R3njc3FFL.jpg", url: "https://irv77.github.io/hd_fnaf/2/" },
             'fnaf3': { title: "Five Nights at Freddy's 3", desc: "30 ans plus tard.", img: "https://upload.wikimedia.org/wikipedia/en/2/2b/FNAF3Artwork.png", url: "https://irv77.github.io/hd_fnaf/3/" },
@@ -277,6 +235,15 @@
             'ps': { title: "Pizzeria Simulator", desc: "Gestion et terreur.", img: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000021207/88dfc4877546db18eeff30dfa891bf7ba1bbfd4544f4304341fbeafbb51c9330", url: "https://irv77.github.io/hd_fnaf/ps/" },
             'ucn': { title: "Ultimate Custom Night", desc: "Mashup ultime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_HDLIuYaC9mNbxnnZt7857CdseXa6-RZ3g&s", url: "https://irv77.github.io/hd_fnaf/ucn/" },
             
+            // RETRO - DS
+            'nsmb': { 
+                title: "NEW SUPER MARIO BROS", 
+                desc: "Le classique DS. (Fichier .nds)", 
+                img: "https://upload.wikimedia.org/wikipedia/en/e/e0/New_Super_Mario_Bros._box_art.jpg", 
+                romPath: "New Super Mario Bros.nds", 
+                core: "nds"
+            },
+
             // RETRO - N64
             'mario64': { 
                 title: "SUPER MARIO 64", 
@@ -326,12 +293,25 @@
             }
         };
 
-        // --- GESTIONNAIRE DE FICHIER ---
+        // --- GESTIONNAIRE DE FICHIER (CORRECTION CRITIQUE) ---
         document.getElementById('rom-uploader').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if(!file) return;
+            
             const fileUrl = URL.createObjectURL(file); 
-            startEmulator(fileUrl, 'nes'); 
+            const ext = file.name.split('.').pop().toLowerCase();
+            
+            // DÉTECTION INTELLIGENTE DU CORE
+            let core = 'nes'; // par défaut
+            
+            if(ext === 'nds') core = 'nds';
+            else if(ext === 'z64' || ext === 'n64') core = 'n64';
+            else if(ext === 'gb') core = 'gb';
+            else if(ext === 'gba') core = 'gba';
+            else if(ext === 'smc' || ext === 'sfc') core = 'snes';
+            else if(ext === 'md') core = 'segaMD';
+
+            startEmulator(fileUrl, core); 
             this.value = null; 
         });
 
@@ -354,7 +334,7 @@
         }
 
         function goBackToHub() {
-            closeEmulator(); // On appelle quand même la fonction mais elle ne rechargera pas si l'écran est caché
+            closeEmulator(false); 
             document.querySelectorAll('.game-section').forEach(el => el.style.display = 'none');
             document.getElementById('backBtn').style.display = 'none';
             document.getElementById('hubSection').style.display = 'flex';
@@ -367,6 +347,7 @@
             if(!game) return;
 
             if (game.romPath) {
+                // Tentative de lancement auto
                 startEmulator(game.romPath, game.core);
             } else if (game.url) {
                 window.location.href = game.url;
@@ -375,7 +356,7 @@
 
         // --- PREVIEWS ---
         function showPreview(gameKey, type) {
-            if (window.matchMedia("(pointer: coarse)").matches) return; // Fix Mobile
+            if (window.matchMedia("(pointer: coarse)").matches) return; 
 
             const data = gamesData[gameKey];
             const staticEl = document.getElementById(type === 'horror' ? 'tvStaticHorror' : 'tvStaticRetro');
@@ -396,7 +377,7 @@
         }
 
         function resetPreview(type) {
-            if (window.matchMedia("(pointer: coarse)").matches) return; // Fix Mobile
+            if (window.matchMedia("(pointer: coarse)").matches) return; 
 
             const staticEl = document.getElementById(type === 'horror' ? 'tvStaticHorror' : 'tvStaticRetro');
             const imgEl = document.getElementById(type === 'horror' ? 'previewImgHorror' : 'previewImgRetro');
@@ -417,6 +398,18 @@
         function startEmulator(romUrl, core) {
             const emuScreen = document.getElementById('emulator-screen');
             const gameDiv = document.getElementById('game');
+            
+            // Si on est en local et que le chargement auto échoue, on propose le manuel
+            // Astuce : on utilise une variable pour détecter si c'est un path ou une URL objet
+            const isLocalPath = typeof romUrl === 'string' && !romUrl.startsWith('blob:');
+            
+            // Si c'est un chemin local et qu'on est en file://, on force l'upload manuel pour éviter l'échec silencieux
+            if (isLocalPath && window.location.protocol === 'file:') {
+               alert("Mode local détecté : Veuillez sélectionner le fichier '" + romUrl + "' sur votre ordinateur pour jouer.");
+               document.getElementById('rom-uploader').click();
+               return;
+            }
+
             gameDiv.innerHTML = '';
             emuScreen.style.display = 'flex';
 
@@ -436,10 +429,12 @@
             document.body.appendChild(script);
         }
 
-        function closeEmulator() {
-            // Uniquement recharger si l'écran de jeu est visible
-            if(document.getElementById('emulator-screen').style.display === 'flex') {
+        function closeEmulator(forceReload = true) {
+            if(forceReload && document.getElementById('emulator-screen').style.display === 'flex') {
                 window.location.reload();
+            } else {
+                document.getElementById('emulator-screen').style.display = 'none';
+                document.getElementById('game').innerHTML = ''; 
             }
         }
 
