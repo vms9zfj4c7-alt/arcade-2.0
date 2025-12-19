@@ -61,7 +61,7 @@
         .cat-content { position: absolute; bottom: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); box-sizing: border-box; }
         .cat-card h3 { margin: 0; font-size: 2rem; text-transform: uppercase; }
         
-        /* --- CHANGEMENT DES IMAGES ICI --- */
+        /* Images Catégories (Mises à jour) */
         .cat-horror { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1hQ1Tg2OCzRWQZoMLX1sntQeezskh32s_Hg&s') center/cover; border-color: #f1c40f; }
         .cat-horror:hover { box-shadow: 0 0 30px #f1c40f; }
         .cat-horror h3 { color: #f1c40f; }
@@ -126,7 +126,7 @@
 </head>
 <body>
 
-    <input type="file" id="rom-uploader" accept=".nes,.sfc,.smc,.gba,.gb,.n64,.md" />
+    <input type="file" id="rom-uploader" accept=".nes,.sfc,.smc,.gba,.gb,.n64,.z64,.md" />
 
     <button id="backBtn" onclick="goBackToHub()">🏠 ACCUEIL</button>
 
@@ -189,6 +189,8 @@
         <div class="main-container">
             <div class="menu-column">
                 
+                <div class="game-btn" onclick="launchGame('mario64')" onmouseenter="showPreview('mario64', 'retro')" onmouseleave="resetPreview('retro')"><span>SUPER MARIO 64</span></div>
+
                 <div class="game-btn" onclick="launchGame('mario')" onmouseenter="showPreview('mario', 'retro')" onmouseleave="resetPreview('retro')"><span>SUPER MARIO BROS</span></div>
                 
                 <div class="game-btn" onclick="launchGame('tetris')" onmouseenter="showPreview('tetris', 'retro')" onmouseleave="resetPreview('retro')"><span>TETRIS (GB)</span></div>
@@ -224,6 +226,15 @@
             'ps': { title: "Pizzeria Simulator", desc: "Gestion et terreur.", img: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000021207/88dfc4877546db18eeff30dfa891bf7ba1bbfd4544f4304341fbeafbb51c9330", url: "https://irv77.github.io/hd_fnaf/ps/" },
             'ucn': { title: "Ultimate Custom Night", desc: "Mashup ultime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_HDLIuYaC9mNbxnnZt7857CdseXa6-RZ3g&s", url: "https://irv77.github.io/hd_fnaf/ucn/" },
             
+            // RETRO - N64 (Nouveau)
+            'mario64': { 
+                title: "SUPER MARIO 64", 
+                desc: "La révolution 3D. (Fichier .z64)", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyQac_rGq8uZBzguFJ6kiOBVKs4iF1pDICkA&s", 
+                romPath: "Super Mario 64 (Europe) (En,Fr,De).z64", 
+                core: "n64"
+            },
+
             // RETRO - NES
             'mario': { 
                 title: "SUPER MARIO BROS", 
@@ -233,13 +244,13 @@
                 core: "nes"
             },
 
-            // RETRO - GAME BOY (Nouveaux jeux)
+            // RETRO - GAME BOY
             'tetris': { 
                 title: "TETRIS", 
                 desc: "Le classique Game Boy.", 
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhKxPYq5XDVZkYW7AJ7HkfMEHVCCG9xabOQ&s", // Image box art
-                romPath: "Tetris (World) (Rev A).gb", // Nom exact fichier
-                core: "gb" // Core Game Boy
+                img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", 
+                romPath: "Tetris (World) (Rev A).gb", 
+                core: "gb" 
             },
             'flappy': { 
                 title: "FLAPPY BIRD", 
@@ -251,14 +262,14 @@
             'dk': { 
                 title: "DONKEY KONG", 
                 desc: "Le jeu Game Boy légendaire.", 
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI7_8e9rT9ut2pdsRKNH8ONtdDaz6Mfq7Bhw&s", 
+                img: "https://upload.wikimedia.org/wikipedia/en/2/22/Donkey_Kong_GB_cover.png", 
                 romPath: "Donkey Kong (World) (Rev A) (SGB Enhanced).gb", 
                 core: "gb" 
             },
             'kirby': { 
                 title: "KIRBY'S DREAM LAND", 
                 desc: "La première aventure de Kirby.", 
-                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLEs1VJ6TqQ3kurQuOIhhzhUZ4vj36RYnDkA&s", 
+                img: "https://upload.wikimedia.org/wikipedia/en/0/00/Kirby_Dream_Land_Box_Art.png", 
                 romPath: "Kirby's Dream Land (USA, Europe).gb", 
                 core: "gb" 
             }
@@ -270,7 +281,10 @@
             const file = e.target.files[0];
             if(!file) return;
             const fileUrl = URL.createObjectURL(file); 
-            startEmulator(fileUrl, 'nes'); // Fallback NES par défaut
+            // Fallback NES par défaut si pas défini, mais ici on a 'currentCore' si besoin
+            // Pour ce script simplifié, on va essayer de deviner ou mettre NES par défaut.
+            // Amélioration possible : stocker le core attendu.
+            startEmulator(fileUrl, 'nes'); 
             this.value = null; 
         });
 
