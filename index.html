@@ -61,10 +61,12 @@
         .cat-content { position: absolute; bottom: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); box-sizing: border-box; }
         .cat-card h3 { margin: 0; font-size: 2rem; text-transform: uppercase; }
         
-        .cat-horror { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKh24MsbvLCcc6hqtZiWZXP6ISCibPHLmR1A&s') center/cover; border-color: #f1c40f; }
+        /* --- CHANGEMENT DES IMAGES ICI --- */
+        .cat-horror { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1hQ1Tg2OCzRWQZoMLX1sntQeezskh32s_Hg&s') center/cover; border-color: #f1c40f; }
         .cat-horror:hover { box-shadow: 0 0 30px #f1c40f; }
         .cat-horror h3 { color: #f1c40f; }
-        .cat-retro { background: url('https://media.istockphoto.com/id/1325433246/vector/arcade-machine-in-neon-style-isolated-on-brick-wall-background.jpg?s=612x612&w=0&k=20&c=Ldyq-k3-lJ5OQJvFvG_59W-3uR7K3Gqg2_rL8KzWw-w=') center/cover; border-color: #ff00de; }
+
+        .cat-retro { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEqzZoTYqECscX9XGvn_BSgwip4Hs18v34SQ&s') center/cover; border-color: #ff00de; }
         .cat-retro:hover { box-shadow: 0 0 30px #ff00de; }
         .cat-retro h3 { color: #ff00de; }
 
@@ -235,7 +237,7 @@
             'tetris': { 
                 title: "TETRIS", 
                 desc: "Le classique Game Boy.", 
-                img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", // Image box art
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhKxPYq5XDVZkYW7AJ7HkfMEHVCCG9xabOQ&s", // Image box art
                 romPath: "Tetris (World) (Rev A).gb", // Nom exact fichier
                 core: "gb" // Core Game Boy
             },
@@ -249,14 +251,14 @@
             'dk': { 
                 title: "DONKEY KONG", 
                 desc: "Le jeu Game Boy légendaire.", 
-                img: "https://upload.wikimedia.org/wikipedia/en/2/22/Donkey_Kong_GB_cover.png", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI7_8e9rT9ut2pdsRKNH8ONtdDaz6Mfq7Bhw&s", 
                 romPath: "Donkey Kong (World) (Rev A) (SGB Enhanced).gb", 
                 core: "gb" 
             },
             'kirby': { 
                 title: "KIRBY'S DREAM LAND", 
                 desc: "La première aventure de Kirby.", 
-                img: "https://upload.wikimedia.org/wikipedia/en/0/00/Kirby_Dream_Land_Box_Art.png", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLEs1VJ6TqQ3kurQuOIhhzhUZ4vj36RYnDkA&s", 
                 romPath: "Kirby's Dream Land (USA, Europe).gb", 
                 core: "gb" 
             }
@@ -268,11 +270,7 @@
             const file = e.target.files[0];
             if(!file) return;
             const fileUrl = URL.createObjectURL(file); 
-            // Note: ici on utilise 'nes' par défaut si on upload manuellement, 
-            // sauf si on a cliqué sur un jeu spécifique avant qui a set une variable globale.
-            // Pour faire simple, on assume NES ou GB selon l'extension si on voulait être parfait.
-            // Mais ici c'est juste un fallback.
-            startEmulator(fileUrl, 'nes'); 
+            startEmulator(fileUrl, 'nes'); // Fallback NES par défaut
             this.value = null; 
         });
 
