@@ -27,102 +27,57 @@
             overflow-x: hidden;
         }
 
-        /* --- BOUTON RETOUR MENU --- */
+        /* --- BOUTON RETOUR --- */
         #backBtn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.5);
-            border: 2px solid var(--text-color);
-            color: var(--text-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            z-index: 100;
-            font-weight: bold;
-            display: none;
+            position: fixed; top: 20px; left: 20px;
+            background: rgba(0,0,0,0.5); border: 2px solid var(--text-color);
+            color: var(--text-color); padding: 10px 20px; border-radius: 30px;
+            cursor: pointer; z-index: 100; font-weight: bold; display: none;
             backdrop-filter: blur(5px);
         }
         #backBtn:hover { background: var(--text-color); color: var(--bg-color); }
 
-        /* --- STYLES DU HUB (ACCUEIL) --- */
+        /* --- HUB --- */
         #hubSection {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 1s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; width: 100%; text-align: center; animation: fadeIn 1s ease;
         }
-
         .hub-title {
-            font-size: 4rem;
-            text-transform: uppercase;
+            font-size: 4rem; text-transform: uppercase;
             background: linear-gradient(to right, #00fff2, #ff00de);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 50px;
-            text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
-            letter-spacing: 5px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 50px; text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
         }
-
-        .category-container {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
+        .category-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
         .cat-card {
-            width: 250px;
-            height: 350px;
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            border: 3px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            width: 250px; height: 350px; border-radius: 20px; position: relative; cursor: pointer; overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .cat-card:hover { transform: scale(1.05); z-index: 10; }
-
-        .cat-content {
-            position: absolute; bottom: 0; width: 100%; padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            box-sizing: border-box;
-        }
+        .cat-content { position: absolute; bottom: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); box-sizing: border-box; }
         .cat-card h3 { margin: 0; font-size: 2rem; text-transform: uppercase; }
-
-        /* Images Catégories */
+        
         .cat-horror { background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKh24MsbvLCcc6hqtZiWZXP6ISCibPHLmR1A&s') center/cover; border-color: #f1c40f; }
         .cat-horror:hover { box-shadow: 0 0 30px #f1c40f; }
         .cat-horror h3 { color: #f1c40f; }
-
         .cat-retro { background: url('https://media.istockphoto.com/id/1325433246/vector/arcade-machine-in-neon-style-isolated-on-brick-wall-background.jpg?s=612x612&w=0&k=20&c=Ldyq-k3-lJ5OQJvFvG_59W-3uR7K3Gqg2_rL8KzWw-w=') center/cover; border-color: #ff00de; }
         .cat-retro:hover { box-shadow: 0 0 30px #ff00de; }
         .cat-retro h3 { color: #ff00de; }
 
-        /* --- SECTIONS DE JEUX --- */
-        .game-section {
-            display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 60px;
-            animation: slideUp 0.5s ease;
-        }
+        /* --- SECTIONS --- */
+        .game-section { display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 60px; animation: slideUp 0.5s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Thèmes */
         .theme-horror { --bg-color: #0a0a12; --panel-bg: #16213e; --text-color: #ecf0f1; --accent-main: #f1c40f; --accent-secondary: #e74c3c; }
         .theme-retro { --bg-color: #120429; --panel-bg: #260a4f; --text-color: #ffffff; --accent-main: #00fff2; --accent-secondary: #d600ff; }
 
         .section-header h1 { font-size: 2.5rem; letter-spacing: 4px; color: var(--accent-main); text-transform: uppercase; margin: 0; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .section-header h2 { font-size: 1rem; color: #7f8c8d; font-weight: normal; margin-top: 5px; letter-spacing: 2px; }
+        .section-header h2 { font-size: 1rem; color: #7f8c8d; font-weight: normal; margin-top: 5px; }
 
         .main-container { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 40px; width: 90%; max-width: 1200px; padding: 20px; box-sizing: border-box; }
         .menu-column { flex: 1; display: flex; flex-direction: column; gap: 15px; max-width: 400px; }
 
-        /* Boutons de jeux */
         .game-btn {
             background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1));
             border: 2px solid rgba(255,255,255,0.1); color: var(--text-color); padding: 15px 20px; border-radius: 10px;
@@ -130,59 +85,28 @@
             text-decoration: none; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden;
         }
         .game-btn:hover { transform: translateX(10px); border-color: var(--accent-main); box-shadow: 0 0 15px var(--accent-main); background: linear-gradient(45deg, var(--panel-bg), rgba(0,0,0,0.5)); }
-        .game-btn span { z-index: 2; }
         .game-btn::after { content: '▶'; opacity: 0; transition: opacity 0.3s; color: var(--accent-main); }
         .game-btn:hover::after { opacity: 1; }
 
-        /* Preview TV */
         .preview-column { flex: 1.2; background-color: #000; border: 4px solid #34495e; border-radius: 20px; height: 500px; position: sticky; top: 20px; box-shadow: 0 0 30px rgba(0,0,0,0.8); overflow: hidden; display: flex; flex-direction: column; }
         .preview-image { width: 100%; height: 65%; object-fit: cover; border-bottom: 2px solid var(--accent-main); background-color: #111; display: none; }
         .preview-content { padding: 20px; background-color: var(--panel-bg); flex-grow: 1; color: #bdc3c7; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-top: 1px solid #000; position: relative; z-index: 6; }
-        .preview-title { color: var(--accent-main); font-size: 3rem; margin: 0 0 10px 0; text-transform: uppercase; font-weight: bold; line-height: 1; transition: font-size 0.2s; }
+        .preview-title { color: var(--accent-main); font-size: 3rem; margin: 0 0 10px 0; text-transform: uppercase; font-weight: bold; line-height: 1; }
         .preview-title.long-text { font-size: 1.8rem; line-height: 1.2; }
         .preview-desc { font-size: 0.95rem; line-height: 1.5; margin: 0; max-width: 100%; color: #aab7b8; }
-        
-        /* Effets */
+
         .tv-static { position: absolute; top: 0; left: 0; width: 100%; height: 65%; z-index: 5; background-color: #111; background-image: repeating-radial-gradient(#000 0 0.0001%, #666 0 0.0002%), repeating-conic-gradient(#000 0 0.0001%, #666 0 0.0002%); background-size: 200% 200%; animation: staticNoise 0.2s infinite; opacity: 0.6; display: block; border-bottom: 2px solid var(--accent-secondary); }
         @keyframes staticNoise { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
         .crt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 10; }
         .blink-text { animation: blink 1s infinite; color: var(--accent-secondary) !important; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- ÉMULATEUR FULLSCREEN --- */
+        /* ÉMULATEUR FULLSCREEN */
         #emulator-screen {
-            display: none; /* Caché par défaut */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 9999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; flex-direction: column; align-items: center; justify-content: center;
         }
-
-        #game {
-            width: 100%;
-            height: 100%;
-        }
-
-        #close-emu-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e74c3c;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 15px;
-            cursor: pointer;
-            z-index: 10000;
-            font-weight: bold;
-            border-radius: 5px;
-            opacity: 0.7;
-        }
+        #game { width: 100%; height: 100%; }
+        #close-emu-btn { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: 2px solid white; padding: 10px 15px; cursor: pointer; z-index: 10000; font-weight: bold; border-radius: 5px; opacity: 0.7; }
         #close-emu-btn:hover { opacity: 1; }
 
         @media (max-width: 850px) {
@@ -272,13 +196,10 @@
         </div>
     </div>
 
-    <script>
-        // --- BASE DE DONNÉES DES JEUX ---
-        // 'url' = lien externe (s'ouvre dans un nouvel onglet ou redirige)
-        // 'rom' = nom du fichier local (lance l'émulateur)
-        // 'core' = console à émuler (nes, snes, gba, etc.)
+   <script>
+        // --- DONNÉES JEUX ---
+        // ATTENTION : Pour Mario, romPath DOIT être le nom exact du fichier sur GitHub
         const gamesData = {
-            // HORREUR (Liens Web)
             'fnaf1': { title: "Five Nights at Freddy's 1", desc: "Survivez 5 nuits.", img: "https://sm.ign.com/ign_fr/cover/f/five-night/five-nights-at-freddys_mnb3.jpg", url: "https://irv77.github.io/hd_fnaf/1/" },
             'fnaf2': { title: "Five Nights at Freddy's 2", desc: "Pas de portes, juste un masque.", img: "https://m.media-amazon.com/images/I/81R3njc3FFL.jpg", url: "https://irv77.github.io/hd_fnaf/2/" },
             'fnaf3': { title: "Five Nights at Freddy's 3", desc: "30 ans plus tard.", img: "https://upload.wikimedia.org/wikipedia/en/2/2b/FNAF3Artwork.png", url: "https://irv77.github.io/hd_fnaf/3/" },
@@ -288,16 +209,17 @@
             'ps': { title: "Pizzeria Simulator", desc: "Gestion et terreur.", img: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000021207/88dfc4877546db18eeff30dfa891bf7ba1bbfd4544f4304341fbeafbb51c9330", url: "https://irv77.github.io/hd_fnaf/ps/" },
             'ucn': { title: "Ultimate Custom Night", desc: "Mashup ultime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_HDLIuYaC9mNbxnnZt7857CdseXa6-RZ3g&s", url: "https://irv77.github.io/hd_fnaf/ucn/" },
             
-            // RETRO (ROMS locales)
+            // --- JEUX ROMS AUTO-LOAD ---
+            // 'romPath' = Le nom du fichier dans ton dossier GitHub.
             'mario': { 
                 title: "SUPER MARIO BROS", 
-                desc: "Sauvez la princesse Peach.", 
+                desc: "Jeu : Super Mario Bros. (World).nes", 
                 img: "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png",
-                rom: "Super Mario Bros. (World).nes", // NOM EXACT DE TON FICHIER
+                romPath: "Super Mario Bros. (World).nes", // NOM EXACT DU FICHIER
                 core: "nes"
             },
-            'tetris': { title: "TETRIS", desc: "Empilez les briques.", img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", url: "#" },
-            'space': { title: "SPACE INVADERS", desc: "Défendez la terre.", img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Space_Invaders_arcade_flyer_%281978%29.jpg/220px-Space_Invaders_arcade_flyer_%281978%29.jpg", url: "#" }
+            'tetris': { title: "TETRIS", desc: "Jeu NES", img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", url: "#" },
+            'space': { title: "SPACE INVADERS", desc: "Jeu NES", img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Space_Invaders_arcade_flyer_%281978%29.jpg/220px-Space_Invaders_arcade_flyer_%281978%29.jpg", url: "#" }
         };
 
         // --- NAVIGATION ---
@@ -319,30 +241,29 @@
         }
 
         function goBackToHub() {
-            closeEmulator(); // Sécurité
+            closeEmulator();
             document.querySelectorAll('.game-section').forEach(el => el.style.display = 'none');
             document.getElementById('backBtn').style.display = 'none';
             document.getElementById('hubSection').style.display = 'flex';
             document.body.classList.remove('theme-horror', 'theme-retro');
         }
 
-        // --- LANCEUR DE JEU (LINK ou EMULATEUR) ---
+        // --- LANCEUR ---
         function launchGame(key) {
             const game = gamesData[key];
             if(!game) return;
 
-            if (game.rom) {
-                // C'est une ROM, on lance l'émulateur
-                startEmulator(game.rom, game.core);
+            if (game.romPath) {
+                // AUTO-LOAD : On passe le nom du fichier directement
+                startEmulator(game.romPath, game.core);
             } else if (game.url && game.url !== "#") {
-                // C'est un lien, on ouvre
                 window.location.href = game.url;
             } else {
-                alert("Jeu non disponible pour le moment.");
+                alert("Jeu non disponible.");
             }
         }
 
-        // --- GESTION PREVIEW ---
+        // --- PREVIEW ---
         function showPreview(gameKey, type) {
             const data = gamesData[gameKey];
             const staticEl = document.getElementById(type === 'horror' ? 'tvStaticHorror' : 'tvStaticRetro');
@@ -354,10 +275,8 @@
                 staticEl.style.display = 'none';
                 imgEl.style.display = 'block';
                 imgEl.src = data.img;
-                
                 titleEl.innerText = data.title;
-                if (data.title.length > 15) titleEl.classList.add('long-text');
-                else titleEl.classList.remove('long-text');
+                if (data.title.length > 15) titleEl.classList.add('long-text'); else titleEl.classList.remove('long-text');
                 titleEl.style.color = type === 'horror' ? "#f1c40f" : "#00fff2"; 
                 titleEl.classList.remove('blink-text'); 
                 descEl.innerText = data.desc;
@@ -380,45 +299,40 @@
             descEl.innerHTML = "... Connexion perdue ...<br>En attente d'entrée manuelle.";
         }
 
-        // --- LOGIQUE ÉMULATEUR ---
-        function startEmulator(romFile, core) {
+        // --- ÉMULATEUR AUTO-LOAD SUR GITHUB ---
+        function startEmulator(romUrl, core) {
             const emuScreen = document.getElementById('emulator-screen');
+            const gameDiv = document.getElementById('game');
+            gameDiv.innerHTML = '';
             emuScreen.style.display = 'flex';
-            
-            // Config EmulatorJS
+
             window.EJS_player = '#game';
             window.EJS_core = core; 
-            window.EJS_gameUrl = romFile; // Le fichier local
+            window.EJS_gameUrl = romUrl; // Ici, romUrl est le nom du fichier (String)
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'; 
             window.EJS_startOnLoaded = true;
             window.EJS_DEBUG_XX = false;
 
-            // Chargement dynamique du script si pas déjà fait
-            if (!window.EJS_LOADED) {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
-                document.body.appendChild(script);
-                window.EJS_LOADED = true;
-            } else {
-                // Si déjà chargé, on espère que EJS gère le reload, 
-                // sinon un refresh de page est parfois nécessaire pour changer de ROM proprement.
-                // Pour cette version simple, on recharge le script.
-                location.reload(); 
-                // Note : EmulatorJS est capricieux sur le changement de ROM dynamique sans reload complet
-                // dans une implémentation simple. Le reload est plus sûr.
-            }
+            const oldScript = document.getElementById('ejs-loader');
+            if(oldScript) oldScript.remove();
+
+            const script = document.createElement('script');
+            script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+            script.id = 'ejs-loader';
+            document.body.appendChild(script);
         }
 
         function closeEmulator() {
             document.getElementById('emulator-screen').style.display = 'none';
-            // Pour arrêter le son et vider la mémoire, le plus simple est de recharger la page
-            // ou de détruire l'instance EJS (complexe).
-            // Ici on cache juste, mais le son pourrait continuer.
-            // Force reload pour nettoyer :
-            location.reload();
+            document.getElementById('game').innerHTML = ''; 
         }
 
-        window.onload = function() { goBackToHub(); };
+        window.onload = function() {
+            document.getElementById('hubSection').style.display = 'flex';
+            document.querySelectorAll('.game-section').forEach(el => el.style.display = 'none');
+            document.getElementById('emulator-screen').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'none';
+        };
     </script>
 </body>
 </html>
