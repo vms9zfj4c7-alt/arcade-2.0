@@ -27,6 +27,9 @@
             overflow-x: hidden;
         }
 
+        /* --- INPUT FICHIER CACHÉ (Sécurité) --- */
+        #rom-uploader { display: none; }
+
         /* --- BOUTON RETOUR --- */
         #backBtn {
             position: fixed; top: 20px; left: 20px;
@@ -47,6 +50,7 @@
             background: linear-gradient(to right, #00fff2, #ff00de);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 50px; text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
+            letter-spacing: 5px;
         }
         .category-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
         .cat-card {
@@ -101,12 +105,14 @@
         .blink-text { animation: blink 1s infinite; color: var(--accent-secondary) !important; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* ÉMULATEUR FULLSCREEN */
+        /* --- ÉMULATEUR FULLSCREEN --- */
         #emulator-screen {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; flex-direction: column; align-items: center; justify-content: center;
         }
         #game { width: 100%; height: 100%; }
-        #close-emu-btn { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: 2px solid white; padding: 10px 15px; cursor: pointer; z-index: 10000; font-weight: bold; border-radius: 5px; opacity: 0.7; }
+        #close-emu-btn {
+            position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: 2px solid white; padding: 10px 15px; cursor: pointer; z-index: 10000; font-weight: bold; border-radius: 5px; opacity: 0.7;
+        }
         #close-emu-btn:hover { opacity: 1; }
 
         @media (max-width: 850px) {
@@ -117,6 +123,8 @@
     </style>
 </head>
 <body>
+
+    <input type="file" id="rom-uploader" accept=".nes,.sfc,.smc,.gba,.gb,.n64,.md" />
 
     <button id="backBtn" onclick="goBackToHub()">🏠 ACCUEIL</button>
 
@@ -178,10 +186,14 @@
         </header>
         <div class="main-container">
             <div class="menu-column">
+                
                 <div class="game-btn" onclick="launchGame('mario')" onmouseenter="showPreview('mario', 'retro')" onmouseleave="resetPreview('retro')"><span>SUPER MARIO BROS</span></div>
                 
-                <div class="game-btn" onclick="launchGame('tetris')" onmouseenter="showPreview('tetris', 'retro')" onmouseleave="resetPreview('retro')"><span>TETRIS</span></div>
-                <div class="game-btn" onclick="launchGame('space')" onmouseenter="showPreview('space', 'retro')" onmouseleave="resetPreview('retro')"><span>SPACE INVADERS</span></div>
+                <div class="game-btn" onclick="launchGame('tetris')" onmouseenter="showPreview('tetris', 'retro')" onmouseleave="resetPreview('retro')"><span>TETRIS (GB)</span></div>
+                <div class="game-btn" onclick="launchGame('dk')" onmouseenter="showPreview('dk', 'retro')" onmouseleave="resetPreview('retro')"><span>DONKEY KONG (GB)</span></div>
+                <div class="game-btn" onclick="launchGame('kirby')" onmouseenter="showPreview('kirby', 'retro')" onmouseleave="resetPreview('retro')"><span>KIRBY'S DREAM LAND</span></div>
+                <div class="game-btn" onclick="launchGame('flappy')" onmouseenter="showPreview('flappy', 'retro')" onmouseleave="resetPreview('retro')"><span>FLAPPY BIRD (GB)</span></div>
+
             </div>
 
             <div class="preview-column" style="border-color: #00fff2;">
@@ -198,8 +210,9 @@
 
    <script>
         // --- DONNÉES JEUX ---
-        // ATTENTION : Pour Mario, romPath DOIT être le nom exact du fichier sur GitHub
+        // romPath doit être EXACTEMENT le nom du fichier sur GitHub
         const gamesData = {
+            // FNAF
             'fnaf1': { title: "Five Nights at Freddy's 1", desc: "Survivez 5 nuits.", img: "https://sm.ign.com/ign_fr/cover/f/five-night/five-nights-at-freddys_mnb3.jpg", url: "https://irv77.github.io/hd_fnaf/1/" },
             'fnaf2': { title: "Five Nights at Freddy's 2", desc: "Pas de portes, juste un masque.", img: "https://m.media-amazon.com/images/I/81R3njc3FFL.jpg", url: "https://irv77.github.io/hd_fnaf/2/" },
             'fnaf3': { title: "Five Nights at Freddy's 3", desc: "30 ans plus tard.", img: "https://upload.wikimedia.org/wikipedia/en/2/2b/FNAF3Artwork.png", url: "https://irv77.github.io/hd_fnaf/3/" },
@@ -209,18 +222,59 @@
             'ps': { title: "Pizzeria Simulator", desc: "Gestion et terreur.", img: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000021207/88dfc4877546db18eeff30dfa891bf7ba1bbfd4544f4304341fbeafbb51c9330", url: "https://irv77.github.io/hd_fnaf/ps/" },
             'ucn': { title: "Ultimate Custom Night", desc: "Mashup ultime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_HDLIuYaC9mNbxnnZt7857CdseXa6-RZ3g&s", url: "https://irv77.github.io/hd_fnaf/ucn/" },
             
-            // --- JEUX ROMS AUTO-LOAD ---
-            // 'romPath' = Le nom du fichier dans ton dossier GitHub.
+            // RETRO - NES
             'mario': { 
                 title: "SUPER MARIO BROS", 
-                desc: "Jeu : Super Mario Bros. (World).nes", 
+                desc: "Sauvez la princesse Peach.", 
                 img: "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png",
-                romPath: "Super Mario Bros. (World).nes", // NOM EXACT DU FICHIER
+                romPath: "Super Mario Bros. (World).nes", 
                 core: "nes"
             },
-            'tetris': { title: "TETRIS", desc: "Jeu NES", img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", url: "#" },
-            'space': { title: "SPACE INVADERS", desc: "Jeu NES", img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Space_Invaders_arcade_flyer_%281978%29.jpg/220px-Space_Invaders_arcade_flyer_%281978%29.jpg", url: "#" }
+
+            // RETRO - GAME BOY (Nouveaux jeux)
+            'tetris': { 
+                title: "TETRIS", 
+                desc: "Le classique Game Boy.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/8/8d/NES_Tetris_Box_Front.jpg", // Image box art
+                romPath: "Tetris (World) (Rev A).gb", // Nom exact fichier
+                core: "gb" // Core Game Boy
+            },
+            'flappy': { 
+                title: "FLAPPY BIRD", 
+                desc: "Un portage non-officiel addictif.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/0/0a/Flappy_Bird_icon.png", 
+                romPath: "FlappyBird.gb", 
+                core: "gb" 
+            },
+            'dk': { 
+                title: "DONKEY KONG", 
+                desc: "Le jeu Game Boy légendaire.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/2/22/Donkey_Kong_GB_cover.png", 
+                romPath: "Donkey Kong (World) (Rev A) (SGB Enhanced).gb", 
+                core: "gb" 
+            },
+            'kirby': { 
+                title: "KIRBY'S DREAM LAND", 
+                desc: "La première aventure de Kirby.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/0/00/Kirby_Dream_Land_Box_Art.png", 
+                romPath: "Kirby's Dream Land (USA, Europe).gb", 
+                core: "gb" 
+            }
         };
+
+        // --- GESTIONNAIRE DE FICHIER (BACKUP) ---
+        // Utile si on teste en local sans serveur
+        document.getElementById('rom-uploader').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if(!file) return;
+            const fileUrl = URL.createObjectURL(file); 
+            // Note: ici on utilise 'nes' par défaut si on upload manuellement, 
+            // sauf si on a cliqué sur un jeu spécifique avant qui a set une variable globale.
+            // Pour faire simple, on assume NES ou GB selon l'extension si on voulait être parfait.
+            // Mais ici c'est juste un fallback.
+            startEmulator(fileUrl, 'nes'); 
+            this.value = null; 
+        });
 
         // --- NAVIGATION ---
         function openCategory(cat) {
@@ -254,16 +308,14 @@
             if(!game) return;
 
             if (game.romPath) {
-                // AUTO-LOAD : On passe le nom du fichier directement
+                // AUTO-LOAD (GitHub)
                 startEmulator(game.romPath, game.core);
-            } else if (game.url && game.url !== "#") {
+            } else if (game.url) {
                 window.location.href = game.url;
-            } else {
-                alert("Jeu non disponible.");
             }
         }
 
-        // --- PREVIEW ---
+        // --- PREVIEWS ---
         function showPreview(gameKey, type) {
             const data = gamesData[gameKey];
             const staticEl = document.getElementById(type === 'horror' ? 'tvStaticHorror' : 'tvStaticRetro');
@@ -299,7 +351,7 @@
             descEl.innerHTML = "... Connexion perdue ...<br>En attente d'entrée manuelle.";
         }
 
-        // --- ÉMULATEUR AUTO-LOAD SUR GITHUB ---
+        // --- EMULATOR ENGINE ---
         function startEmulator(romUrl, core) {
             const emuScreen = document.getElementById('emulator-screen');
             const gameDiv = document.getElementById('game');
@@ -308,7 +360,7 @@
 
             window.EJS_player = '#game';
             window.EJS_core = core; 
-            window.EJS_gameUrl = romUrl; // Ici, romUrl est le nom du fichier (String)
+            window.EJS_gameUrl = romUrl; 
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/'; 
             window.EJS_startOnLoaded = true;
             window.EJS_DEBUG_XX = false;
