@@ -40,20 +40,17 @@
         }
         #backBtn:hover { background: var(--text-color); color: var(--bg-color); }
 
-        /* --- HUB (CORRIGÉ POUR ÉVITER LA COUPURE) --- */
+        /* --- HUB (CORRIGÉ) --- */
         #hubSection {
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            /* Utilisation de min-height au lieu de height pour éviter de couper sur petit écran */
             min-height: 100vh; 
             width: 100%; 
             text-align: center; 
             animation: fadeIn 1s ease;
-            /* Ajout de marges intérieures pour ne pas coller aux bords */
-            padding-top: 50px; 
-            padding-bottom: 50px;
+            padding: 50px 0;
             box-sizing: border-box;
         }
 
@@ -63,7 +60,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 50px; text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
             letter-spacing: 5px;
-            margin-top: 0; /* Sécurité */
+            margin-top: 0; 
         }
 
         .category-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
@@ -84,16 +81,50 @@
         .cat-retro:hover { box-shadow: 0 0 30px #ff00de; }
         .cat-retro h3 { color: #ff00de; }
 
-        /* --- SECTIONS --- */
-        .game-section { display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 60px; padding-bottom: 50px; animation: slideUp 0.5s ease; }
+        /* --- SECTIONS JEUX --- */
+        .game-section { 
+            display: none; 
+            width: 100%; 
+            flex-direction: column; 
+            align-items: center; 
+            padding-top: 40px; 
+            padding-bottom: 50px; 
+            animation: slideUp 0.5s ease; 
+        }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* --- HEADER SECTION (TITRES CENTRÉS) --- */
+        .section-header {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-header h1 { 
+            font-size: 3rem; 
+            letter-spacing: 4px; 
+            color: var(--accent-main); 
+            text-transform: uppercase; 
+            margin: 0; 
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); 
+            text-align: center;
+        }
+        
+        .section-header h2 { 
+            font-size: 1.2rem; 
+            color: #7f8c8d; 
+            font-weight: normal; 
+            margin-top: 10px; 
+            letter-spacing: 2px; 
+            text-align: center;
+        }
+
         .theme-horror { --bg-color: #0a0a12; --panel-bg: #16213e; --text-color: #ecf0f1; --accent-main: #f1c40f; --accent-secondary: #e74c3c; }
         .theme-retro { --bg-color: #120429; --panel-bg: #260a4f; --text-color: #ffffff; --accent-main: #00fff2; --accent-secondary: #d600ff; }
-
-        .section-header h1 { font-size: 2.5rem; letter-spacing: 4px; color: var(--accent-main); text-transform: uppercase; margin: 0; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .section-header h2 { font-size: 1rem; color: #7f8c8d; font-weight: normal; margin-top: 5px; }
 
         .main-container { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 40px; width: 90%; max-width: 1200px; padding: 20px; box-sizing: border-box; }
         .menu-column { flex: 1; display: flex; flex-direction: column; gap: 15px; max-width: 400px; }
@@ -136,8 +167,9 @@
             .menu-column, .preview-column { width: 100%; }
             .preview-column { height: 350px; }
             
-            /* AJUSTEMENT MOBILE POUR LE TITRE */
+            /* AJUSTEMENT MOBILE */
             .hub-title { font-size: 2.5rem; margin-top: 30px; }
+            .section-header h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -177,6 +209,9 @@
         </header>
         <div class="main-container">
             <div class="menu-column">
+                
+                <div class="game-btn" onclick="launchGame('fnafnes')" onmouseenter="showPreview('fnafnes', 'horror')" onmouseleave="resetPreview('horror')"><span>FNAF (NES)</span></div>
+
                 <div class="game-btn" onclick="launchGame('fnaf1')" onmouseenter="showPreview('fnaf1', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 1</span></div>
                 <div class="game-btn" onclick="launchGame('fnaf2')" onmouseenter="showPreview('fnaf2', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 2</span></div>
                 <div class="game-btn" onclick="launchGame('fnaf3')" onmouseenter="showPreview('fnaf3', 'horror')" onmouseleave="resetPreview('horror')"><span>F.N.A.F 3</span></div>
@@ -229,7 +264,10 @@
         // --- DONNÉES JEUX ---
         // romPath doit être EXACTEMENT le nom du fichier sur GitHub
         const gamesData = {
-            // FNAF
+            // HORROR (NES DEMAKE AJOUTÉ)
+            'fnafnes': { title: "FNAF (NES DEMAKE)", desc: "Le cauchemar en 8-bits. (Fichier .nes)", img: "https://m.gjcdn.net/game-screenshot/200/35829090-qzkrk8hm-v4.webp", romPath: "fnaf.nes", core: "nes" },
+
+            // FNAF WEB
             'fnaf1': { title: "Five Nights at Freddy's 1", desc: "Survivez 5 nuits.", img: "https://sm.ign.com/ign_fr/cover/f/five-night/five-nights-at-freddys_mnb3.jpg", url: "https://irv77.github.io/hd_fnaf/1/" },
             'fnaf2': { title: "Five Nights at Freddy's 2", desc: "Pas de portes, juste un masque.", img: "https://m.media-amazon.com/images/I/81R3njc3FFL.jpg", url: "https://irv77.github.io/hd_fnaf/2/" },
             'fnaf3': { title: "Five Nights at Freddy's 3", desc: "30 ans plus tard.", img: "https://upload.wikimedia.org/wikipedia/en/2/2b/FNAF3Artwork.png", url: "https://irv77.github.io/hd_fnaf/3/" },
@@ -399,7 +437,7 @@
         }
 
         function closeEmulator() {
-            // Uniquement recharger si l'écran de jeu est visible, sinon on boucle pas
+            // Uniquement recharger si l'écran de jeu est visible
             if(document.getElementById('emulator-screen').style.display === 'flex') {
                 window.location.reload();
             }
