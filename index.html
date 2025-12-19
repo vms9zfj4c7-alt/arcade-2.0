@@ -40,19 +40,34 @@
         }
         #backBtn:hover { background: var(--text-color); color: var(--bg-color); }
 
-        /* --- HUB --- */
+        /* --- HUB (CORRIGÉ POUR ÉVITER LA COUPURE) --- */
         #hubSection {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; width: 100%; text-align: center; animation: fadeIn 1s ease;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            /* Utilisation de min-height au lieu de height pour éviter de couper sur petit écran */
+            min-height: 100vh; 
+            width: 100%; 
+            text-align: center; 
+            animation: fadeIn 1s ease;
+            /* Ajout de marges intérieures pour ne pas coller aux bords */
+            padding-top: 50px; 
+            padding-bottom: 50px;
+            box-sizing: border-box;
         }
+
         .hub-title {
             font-size: 4rem; text-transform: uppercase;
             background: linear-gradient(to right, #00fff2, #ff00de);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 50px; text-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
             letter-spacing: 5px;
+            margin-top: 0; /* Sécurité */
         }
+
         .category-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+
         .cat-card {
             width: 250px; height: 350px; border-radius: 20px; position: relative; cursor: pointer; overflow: hidden;
             border: 3px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s;
@@ -70,7 +85,7 @@
         .cat-retro h3 { color: #ff00de; }
 
         /* --- SECTIONS --- */
-        .game-section { display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 60px; animation: slideUp 0.5s ease; }
+        .game-section { display: none; width: 100%; flex-direction: column; align-items: center; padding-top: 60px; padding-bottom: 50px; animation: slideUp 0.5s ease; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -120,6 +135,9 @@
             .main-container { flex-direction: column-reverse; align-items: center; }
             .menu-column, .preview-column { width: 100%; }
             .preview-column { height: 350px; }
+            
+            /* AJUSTEMENT MOBILE POUR LE TITRE */
+            .hub-title { font-size: 2.5rem; margin-top: 30px; }
         }
     </style>
 </head>
@@ -208,7 +226,10 @@
     </div>
 
    <script>
+        // --- DONNÉES JEUX ---
+        // romPath doit être EXACTEMENT le nom du fichier sur GitHub
         const gamesData = {
+            // FNAF
             'fnaf1': { title: "Five Nights at Freddy's 1", desc: "Survivez 5 nuits.", img: "https://sm.ign.com/ign_fr/cover/f/five-night/five-nights-at-freddys_mnb3.jpg", url: "https://irv77.github.io/hd_fnaf/1/" },
             'fnaf2': { title: "Five Nights at Freddy's 2", desc: "Pas de portes, juste un masque.", img: "https://m.media-amazon.com/images/I/81R3njc3FFL.jpg", url: "https://irv77.github.io/hd_fnaf/2/" },
             'fnaf3': { title: "Five Nights at Freddy's 3", desc: "30 ans plus tard.", img: "https://upload.wikimedia.org/wikipedia/en/2/2b/FNAF3Artwork.png", url: "https://irv77.github.io/hd_fnaf/3/" },
@@ -218,12 +239,53 @@
             'ps': { title: "Pizzeria Simulator", desc: "Gestion et terreur.", img: "https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000021207/88dfc4877546db18eeff30dfa891bf7ba1bbfd4544f4304341fbeafbb51c9330", url: "https://irv77.github.io/hd_fnaf/ps/" },
             'ucn': { title: "Ultimate Custom Night", desc: "Mashup ultime.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd_HDLIuYaC9mNbxnnZt7857CdseXa6-RZ3g&s", url: "https://irv77.github.io/hd_fnaf/ucn/" },
             
-            'mario64': { title: "SUPER MARIO 64", desc: "La révolution 3D. (Fichier .z64)", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyQac_rGq8uZBzguFJ6kiOBVKs4iF1pDICkA&s", romPath: "Super Mario 64 (Europe) (En,Fr,De).z64", core: "n64" },
-            'mario': { title: "SUPER MARIO BROS", desc: "Sauvez la princesse Peach.", img: "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png", romPath: "Super Mario Bros. (World).nes", core: "nes" },
-            'tetris': { title: "TETRIS", desc: "Le classique Game Boy.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhKxPYq5XDVZkYW7AJ7HkfMEHVCCG9xabOQ&s", romPath: "Tetris (World) (Rev A).gb", core: "gb" },
-            'flappy': { title: "FLAPPY BIRD", desc: "Un portage non-officiel addictif.", img: "https://upload.wikimedia.org/wikipedia/en/0/0a/Flappy_Bird_icon.png", romPath: "FlappyBird.gb", core: "gb" },
-            'dk': { title: "DONKEY KONG", desc: "Le jeu Game Boy légendaire.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzZyml5vXLb2kPwK_aA2_ZuQvVoM_tqYv-Bw&s", romPath: "Donkey Kong (World) (Rev A) (SGB Enhanced).gb", core: "gb" },
-            'kirby': { title: "KIRBY'S DREAM LAND", desc: "La première aventure de Kirby.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRny7QVd-gXzZywEG3XIo1RZxagyBhSlS_TeA&s", romPath: "Kirby's Dream Land (USA, Europe).gb", core: "gb" }
+            // RETRO - N64
+            'mario64': { 
+                title: "SUPER MARIO 64", 
+                desc: "La révolution 3D. (Fichier .z64)", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyQac_rGq8uZBzguFJ6kiOBVKs4iF1pDICkA&s", 
+                romPath: "Super Mario 64 (Europe) (En,Fr,De).z64", 
+                core: "n64"
+            },
+
+            // RETRO - NES
+            'mario': { 
+                title: "SUPER MARIO BROS", 
+                desc: "Sauvez la princesse Peach.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png",
+                romPath: "Super Mario Bros. (World).nes", 
+                core: "nes"
+            },
+
+            // RETRO - GAME BOY
+            'tetris': { 
+                title: "TETRIS", 
+                desc: "Le classique Game Boy.", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhKxPYq5XDVZkYW7AJ7HkfMEHVCCG9xabOQ&s", 
+                romPath: "Tetris (World) (Rev A).gb", 
+                core: "gb" 
+            },
+            'flappy': { 
+                title: "FLAPPY BIRD", 
+                desc: "Un portage non-officiel addictif.", 
+                img: "https://upload.wikimedia.org/wikipedia/en/0/0a/Flappy_Bird_icon.png", 
+                romPath: "FlappyBird.gb", 
+                core: "gb" 
+            },
+            'dk': { 
+                title: "DONKEY KONG", 
+                desc: "Le jeu Game Boy légendaire.", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzZyml5vXLb2kPwK_aA2_ZuQvVoM_tqYv-Bw&s", 
+                romPath: "Donkey Kong (World) (Rev A) (SGB Enhanced).gb", 
+                core: "gb" 
+            },
+            'kirby': { 
+                title: "KIRBY'S DREAM LAND", 
+                desc: "La première aventure de Kirby.", 
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRny7QVd-gXzZywEG3XIo1RZxagyBhSlS_TeA&s", 
+                romPath: "Kirby's Dream Land (USA, Europe).gb", 
+                core: "gb" 
+            }
         };
 
         // --- GESTIONNAIRE DE FICHIER ---
@@ -254,9 +316,7 @@
         }
 
         function goBackToHub() {
-            // Ici, on ne fait que cacher les divs. 
-            // On ne recharge PAS la page ici pour éviter la boucle au démarrage.
-            document.getElementById('emulator-screen').style.display = 'none';
+            closeEmulator(); // On appelle quand même la fonction mais elle ne rechargera pas si l'écran est caché
             document.querySelectorAll('.game-section').forEach(el => el.style.display = 'none');
             document.getElementById('backBtn').style.display = 'none';
             document.getElementById('hubSection').style.display = 'flex';
@@ -339,11 +399,12 @@
         }
 
         function closeEmulator() {
-            // ICI C'EST SÛR : ON NE RECHARGE QUE SI ON CLIQUE SUR LE BOUTON
-            window.location.reload();
+            // Uniquement recharger si l'écran de jeu est visible, sinon on boucle pas
+            if(document.getElementById('emulator-screen').style.display === 'flex') {
+                window.location.reload();
+            }
         }
 
-        // Init
         window.onload = function() {
             document.getElementById('hubSection').style.display = 'flex';
             document.querySelectorAll('.game-section').forEach(el => el.style.display = 'none');
